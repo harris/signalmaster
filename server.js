@@ -3,7 +3,7 @@ var yetify = require('yetify'),
     config = require('getconfig'),
     fs = require('fs'),
     sockets = require('./sockets'),
-    port = parseInt(process.env.PORT || config.server.port, 10),
+    port = parseInt(config.server.port, 10),
     server_handler = function (req, res) {
         res.writeHead(404);
         res.end();
@@ -20,7 +20,7 @@ if (config.server.secure) {
 } else {
     server = require('http').Server(server_handler);
 }
-server.listen(port);
+server.listen(config.server.port);
 
 sockets(server, config);
 
